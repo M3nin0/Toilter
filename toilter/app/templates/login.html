@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ super() }} - Login {% endblock %}
+
+{% block content %}
+
+<form action="" method="POST">
+  <!-- Campo para validação do formulário -->
+  {{ form.csrf_token }}
+  <div class="form-group">
+    <label>Usuário</label>
+    <!-- class == representa classes html, porém sendo passadas para o python -->
+    {{ form.username(class="form-control", placeholder = "cebolinha") }}
+
+    <!-- Validando o campo username -->
+    {% if form.errors.username %}
+    <div class="alert alert-danger" role="alert">
+      Este campo deve ser preenchido
+    </div>
+    {% endif %}
+  </div>
+  <div class="form-group">
+    <label>Senha</label>
+    {{ form.password(class="form-control") }}
+
+    <!-- Validando o campo password -->
+    {% if form.errors.password %}
+    <div class="alert alert-danger" role="alert">
+      Este campo deve ser preenchido
+    </div>
+    {% endif %}
+  </div>
+  <div class="checkbox">
+    <label>
+      {{ form.remember_me }} Lembrar-me
+    </label>
+  </div>
+  <button type="submit" class="btn btn-default">
+    Enviar
+  </button>
+</form>
+
+{% endblock %}
